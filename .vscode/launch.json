@@ -1,0 +1,49 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+      {
+          "name": "Python: Current File (Integrated Terminal)",
+          "type": "python",
+          "request": "launch",
+          "program": "${file}",
+          "console": "integratedTerminal"
+      },
+      {
+          "name": "Yankee Fork 2018 Batch (Integrated Terminal)",
+          "type": "python",
+          "request": "launch",
+          "program": "${workspaceFolder}/scripts/batch_run.py",
+          "envFile": "${workspaceFolder}/.env",
+          "console": "integratedTerminal",
+          "args": [
+              "/Users/matt/Work/data/bratDockerShare/Workbench/workbench.db",
+              "/Users/matt/Work/data/bratDockerShare/MonitoringDataUnzipped",
+              "/Users/matt/Work/data/bratDockerShare/MonitoringDataZipped",
+              "/Users/matt/Work/data/bratDockerShare/InputOutputFiles"
+          ]
+      },
+      {
+          "name": "Yankee Fork 2020 Batch (Integrated Terminal)",
+          "type": "python",
+          "request": "launch",
+          // "program": "${workspaceFolder}/scripts/batch_run.py",
+          "module": "scripts.critfc_2018",
+          "console": "integratedTerminal",
+          "args": [
+              "D:/CHaMP/Workbench/workbench.db",
+              "D:/CHaMP/MonitoringDataUnzipped/2020",
+              "D:/CHaMP/InputOutputFiles"
+          ]
+      },
+      {
+          "name": "Python: Current File (External Terminal)",
+          "type": "python",
+          "request": "launch",
+          "program": "${file}",
+          "console": "externalTerminal"
+      }
+  ]
+}

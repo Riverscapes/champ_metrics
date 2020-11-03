@@ -1,0 +1,39 @@
+{
+	// See https://go.microsoft.com/fwlink/?LinkId=733558
+	// for the documentation about the tasks.json format
+	"version": "2.0.0",
+	"command": "cmd", // for windows "command": "cmd"
+	"args": [
+		"-c"
+		], // for windows "args": ["/C"]
+		"tasks": [
+			{
+				"label": "pylint: whole project",
+				"type": "shell",
+				"command": ".venv/bin/pylint --msg-template \"{path}:{line}:{column}:{category}:{symbol} - {msg}\" champmetrics",
+					"windows": {
+						"command": ".venv/Scripts/pylint --msg-template \"{path}:{line}: {column}:{category}:{symbol} - {msg}\" champmetrics"
+						},
+						"presentation": {
+							"reveal": "never",
+							"panel": "shared"
+						},
+						"problemMatcher": {
+							"owner": "python",
+							"fileLocation": [
+								"relative",
+								"${workspaceFolder}"
+							],
+							"pattern": {
+								"regexp": "^(.+):(\\d+):(\\d+):(\\w+):(.*)$",
+								"file": 1,
+								"line": 2,
+								"column": 3,
+								"severity": 4,
+								"message": 5
+							}
+						}
+					}
+				]
+			}
+			
