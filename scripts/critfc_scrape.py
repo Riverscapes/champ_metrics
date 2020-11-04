@@ -71,7 +71,7 @@ def BatchRun(workbench, outputDir):
                     toCSV.extend(instanceList)
 
         # Write a single CSV for this schema that contains all metric instances
-        outputCSV = os.path.join(outputDir, '2019_yankee_fork_topo_{0}_metrics.csv'.format(schemaName))
+        outputCSV = os.path.join(outputDir, 'topo_{0}_metrics.csv'.format(schemaName))
         with open(outputCSV, 'w') as f:  # Just use 'w' mode in 3.x
             w = csv.DictWriter(f, csvHeaders)
             w.writeheader()
@@ -155,7 +155,7 @@ def getMetricResultFilePaths(parentFolder):
     """
     result = []
 
-    for root, dirnames, filenames in os.walk(parentFolder):
+    for root, _dirnames, filenames in os.walk(parentFolder):
         for filename in fnmatch.filter(filenames, 'topo_metrics.xml'):
             parts = os.path.basename(root).split('_')
             visit = int(parts[1])
