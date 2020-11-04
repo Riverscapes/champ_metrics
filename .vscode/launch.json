@@ -29,13 +29,23 @@
           "name": "Yankee Fork 2020 Batch (Integrated Terminal)",
           "type": "python",
           "request": "launch",
-          // "program": "${workspaceFolder}/scripts/batch_run.py",
           "module": "scripts.critfc_2018",
           "console": "integratedTerminal",
           "args": [
-              "D:/CHaMP/Workbench/workbench.db",
-              "D:/CHaMP/MonitoringDataUnzipped/2020",
-              "D:/CHaMP/InputOutputFiles"
+              "/Users/philip/GISData/CHaMP/workbench.db",
+              "/Users/philip/GISData/CHaMP/YankeeFork/2020",
+              "/Users/philip/GISData/CHaMP/YankeForkMetrics/2020"
+          ]
+      },
+      {
+          "name": "Scrape metrics to CSV",
+          "type": "python",
+          "request": "launch",
+          "module": "scripts.critfc_scrape",
+          "console": "integratedTerminal",
+          "args": [
+              "/Users/philip/GISData/CHaMP/workbench.db",
+              "/Users/philip/GISData/CHaMP/YankeForkMetrics/2020"
           ]
       },
       {
