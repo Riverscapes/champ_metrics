@@ -25,9 +25,8 @@ from champmetrics.lib.loghelper import Logger
 
 def BatchRun(workbench, topoData, outputDir):
 
-    dbCon = sqlite3.connect(workbench)
-    dbCurs = dbCon.cursor()
-
+    # dbCon = sqlite3.connect(workbench)
+    # dbCurs = dbCon.cursor()
     # dbCurs.execute('SELECT VisitID, WatershedName, VisitYear, SiteName FROM vwMainVisitList WHERE (VisitID IN ({0}))'.format(','.join(map(lambda x: str(x), jdAux))))
     # for row in dbCurs.fetchall():
 
@@ -42,8 +41,8 @@ def BatchRun(workbench, topoData, outputDir):
     for project in projects:
         print(project)
 
-        # if project[0] == 9028 or project[0] == 9027 or project[0] == 9023 or project[0] == 9022:
-        #     continue
+        if project[0] == 9053 or project[0] == 9020:
+            continue
 
         outputFolder = project[3].replace(topoData, outputDir)
 
@@ -96,6 +95,7 @@ def getTopoProjects(parentFolder):
         for filename in fnmatch.filter(filenames, 'project.rs.xml'):
             if 'VISIT_' not in root:
                 continue
+
             parts = os.path.basename(root).split('_')
             tup = (int(parts[1]), parts[0].upper(), None, root)
             result.append(tup)

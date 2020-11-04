@@ -246,7 +246,7 @@ class ChannelUnitMetrics(CHaMPMetric):
         tierMetrics['Spacing'] = siteLength / tierMetrics['Count']
         tierMetrics['Frequency'] = 100 * tierMetrics['Count'] / siteLength
         tierMetrics['Percent'] = 100 * tierMetrics['Area'] / siteArea
-        tierMetrics['MaxMaxDepth'] = max(tierMetrics['MaxMaxDepth'], unitMetrics['MaxDepth'])
+        tierMetrics['MaxMaxDepth'] = max(tierMetrics['MaxMaxDepth'], unitMetrics['MaxDepth']) if tierMetrics['MaxMaxDepth'] else unitMetrics['MaxDepth']
         tierMetrics['ThalwegIntersectCount'] += unitMetrics['ThalwegIntersect']
 
         if unitMetrics['ResidualDepth']:

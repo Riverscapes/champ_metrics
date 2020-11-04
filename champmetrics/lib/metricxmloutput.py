@@ -29,7 +29,7 @@ def writeMetricsToXML(dMetricsArg, visitID, sourceDir, xmlFilePath, modelEngineR
     rough_string = ET.tostring(tree.getroot(), 'utf-8')
     reparsed = xml.dom.minidom.parseString(rough_string)
     pretty = reparsed.toprettyxml(indent="\t")
-    with open(xmlFilePath, "wb") as f:
+    with open(xmlFilePath, "w") as f:
         f.write(pretty)
 
     log.info("Wrote metrics to file: {}".format(xmlFilePath))
@@ -41,7 +41,7 @@ def _writeDictionaryToXML(parentNode, dValues):
         if isinstance(item, dict):
             _writeDictionaryToXML(newParent, item)
         elif isinstance(item, list):
-            for listItem in sorted(item):
+            for listItem in item:
                 nodChild = ET.SubElement(newParent, 'Item')
                 _writeDictionaryToXML(nodChild, listItem)
         elif item is not None:

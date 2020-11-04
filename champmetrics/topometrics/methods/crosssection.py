@@ -56,7 +56,7 @@ class CrossSectionMetrics(CHaMPMetric):
 
         # Save space by only loading the desired fields from the ShapeFile.
         # We also need the 'Channel' and 'IsValid' fields if they exist.
-        desiredFields = CrossSectionMetrics.dMetricTypes.keys()
+        desiredFields = list(CrossSectionMetrics.dMetricTypes.keys())
         desiredFields.append('IsValid')
 
         # Open the cross section ShapeFile & build a list of all features with a dictionary of the desired fields
@@ -314,7 +314,7 @@ def getStatistics(lFeatures, sAttribute):
     if len(lValues) > 0 and not all(b is None for b in lValues):
         # TODO: What do we mean here by np.mean? Do we mean any or all above?
         # This will make all None values 0 but that may skew the mean
-        lValues = filter(lambda x: x is not None, lValues)
+        lValues = list(filter(lambda x: x is not None, lValues))
 
         dStatistics['Count'] = len(lValues)
         dStatistics['Mean'] = np.mean(lValues)

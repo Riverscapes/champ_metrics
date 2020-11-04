@@ -72,7 +72,7 @@ def BatchRun(workbench, outputDir):
 
         # Write a single CSV for this schema that contains all metric instances
         outputCSV = os.path.join(outputDir, '2019_yankee_fork_topo_{0}_metrics.csv'.format(schemaName))
-        with open(outputCSV, 'wb') as f:  # Just use 'w' mode in 3.x
+        with open(outputCSV, 'w') as f:  # Just use 'w' mode in 3.x
             w = csv.DictWriter(f, csvHeaders)
             w.writeheader()
 
