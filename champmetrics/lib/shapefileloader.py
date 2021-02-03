@@ -1,9 +1,10 @@
-import ogr
+from osgeo import ogr
 import json
 import os
 from shapely.geometry import shape
 from .loghelper import Logger
 from .exception import DataException
+
 
 class Shapefile:
 
@@ -18,7 +19,6 @@ class Shapefile:
         if sFilename and os.path.isfile(sFilename):
             self.load(sFilename)
             self.loaded = True
-
 
     def load(self, sFilename):
         dataSource = self.driver.Open(sFilename, 0)
@@ -111,7 +111,7 @@ class Shapefile:
             try:
                 feats.append({
                     'FID': feat.GetFID(),
-                    'geometry': shape(featobj['geometry']) if not featobj["geometry"] is None else None, # case when feature contains no geometry (rare)
+                    'geometry': shape(featobj['geometry']) if not featobj["geometry"] is None else None,  # case when feature contains no geometry (rare)
                     'fields': fields
                 })
             except ValueError as e:

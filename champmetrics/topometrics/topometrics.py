@@ -1,5 +1,6 @@
 import argparse
-import sys, traceback
+import sys
+import traceback
 import os
 
 from .TopoData import TopoData
@@ -20,6 +21,7 @@ from champmetrics.lib.channelunits import loadChannelUnitsFromAPI, loadChannelUn
 from champmetrics.lib.exception import DataException, MissingException, NetworkException
 
 __version__ = "0.0.4"
+
 
 def visitTopoMetrics(visitID, metricXMLPath, topoDataFolder, channelunitsfile, workbenchdb, channelUnitDefs):
 
@@ -95,6 +97,7 @@ def visitTopoMetrics(visitID, metricXMLPath, topoDataFolder, channelunitsfile, w
     log.info("Metric calculation complete for visit {0}".format(visitID))
     return visitMetrics
 
+
 def main():
     # parse command line options
     parser = argparse.ArgumentParser()
@@ -103,7 +106,7 @@ def main():
     parser.add_argument('--channelunitsjson', help='(optional) json file to load channel units from', type=str)
     parser.add_argument('--workbenchdb', help='(optional) sqlite db to load channel units from', type=str)
     parser.add_argument('--datafolder', help='(optional) Top level folder containing TopoMetrics Riverscapes projects', type=str)
-    parser.add_argument('--verbose', help='Get more information in your logs.', action='store_true', default=False )
+    parser.add_argument('--verbose', help='Get more information in your logs.', action='store_true', default=False)
     args = parser.parse_args()
 
     # Make sure the output folder exists

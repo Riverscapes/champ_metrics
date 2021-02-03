@@ -1,9 +1,10 @@
 import fnmatch
 import argparse
-import sys, traceback
+import sys
+import traceback
 import os
 import sqlite3
-
+from osgeo import gdal, ogr, osr
 import xml.etree.ElementTree as ET
 # from auxmetrics.auxmetrics import runAuxMetrics
 from champmetrics.topometrics.topometrics import visitTopoMetrics
@@ -22,6 +23,7 @@ from champmetrics.lib.loghelper import Logger
 #     'Slow Water': ['PL', 'OC'],
 #     'Special Case': ['DRY', 'Culv', 'MRSH']
 # }
+
 
 def BatchRun(workbench, topoData, outputDir):
 
@@ -57,6 +59,7 @@ def BatchRun(workbench, topoData, outputDir):
         visitTopoMetrics(project[0], os.path.join(outputFolder, 'topo_metrics.xml'), project[3], jsonFilePath, None, dUnitDefs)
 
     print(projects)
+
 
 def createChannelUnitsJSON(topoDataFolder, visitID, jsonFilePath):
 
@@ -102,6 +105,7 @@ def getTopoProjects(parentFolder):
 
     return result
 
+
 def main():
 
     parser = argparse.ArgumentParser()
@@ -115,6 +119,7 @@ def main():
 
     except Exception as e:
         traceback.print_exc(file=sys.stdout)
+
 
 if __name__ == "__main__":
     main()

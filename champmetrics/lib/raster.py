@@ -1,15 +1,16 @@
-from osgeo import gdal, ogr, osr
-import numpy as np
-from shapely.geometry import shape, Polygon
 from os import path
-from .exception import DataException, NetworkException, MissingException
-from .loghelper import Logger
 import copy
 # from decimal import *
 from affine import Affine
+import numpy as np
+from osgeo import gdal, ogr, osr
+from shapely.geometry import shape, Polygon
+from .exception import DataException, NetworkException, MissingException
+from .loghelper import Logger
 
 # this allows GDAL to throw Python Exceptions
 gdal.UseExceptions()
+
 
 class Raster:
 
@@ -19,7 +20,7 @@ class Raster:
         self.errs = ""
         try:
             if (path.isfile(self.filename)):
-                src_ds = gdal.Open( self.filename )
+                src_ds = gdal.Open(self.filename)
             else:
                 self.log.error("Missing file: {}".format(self.filename))
                 raise MissingException("Could not find raster file: {}".format(path.basename(self.filename)))
@@ -144,7 +145,7 @@ class Raster:
         :param raster:
         :return:
         """
-        pointsdict = { "points": points, "values": [] }
+        pointsdict = {"points": points, "values": []}
 
         for pt in pointsdict['points']:
             pointsdict['values'].append(self.getPixelVal(pt.coords[0]))
@@ -153,7 +154,6 @@ class Raster:
         pointsdict['values'] = np.ma.masked_invalid(pointsdict['values'])
 
         return pointsdict
-
 
     def write(self, outputRaster):
         """
@@ -222,8 +222,9 @@ class Raster:
         self.min = np.nanmin(self.array)
         self.max = np.nanmax(self.array)
 
+
 def isclose(a, b, rel_tol=1e-09, abs_tol=0):
-    return abs(a-b) <= max(rel_tol * max(abs(a), abs(b)), abs_tol)
+    return abs(a - b) <= max(rel_tol * max(abs(a), abs(b)), abs_tol)
 
 
 def PrintArr(arr):
@@ -254,7 +255,7 @@ def get_data_polygon(rasterfile):
     from shapely.geometry import shape
 
     r = Raster(rasterfile)
-    array = np.array(r.array.mask*1, dtype=np.int16)
+    array = np.array(r.array.mask * 1, dtype=np.int16)
 
 #    with rasterio.drivers():
     with rasterio.open(rasterfile) as src:
@@ -268,15 +269,17 @@ def get_data_polygon(rasterfile):
             transform = src.affine  # for compatibility with rasterio 0.36
 
         results = ({'properties': {'raster_val': v}, 'geometry': s}
-                    for i, (s, v) in enumerate(shapes(array, mask=mask_array, transform=transform)))
+                   for i, (s, v) in enumerate(shapes(array, mask=mask_array, transform=transform)))
 
     geoms = list(results)
     polygons = [shape(geom['geometry']) for geom in geoms]
 
     return polygons
 
+
 def rasterCopy(rObj):
     return copy.copy(rObj)
+
 
 def deleteRaster(sFullPath):
     """

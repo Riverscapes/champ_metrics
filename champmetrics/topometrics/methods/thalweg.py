@@ -1,13 +1,13 @@
 import logging
-from shapely.geometry import *
-from champmetrics.lib.raster import Raster
-import numpy as np
-from os import path
 import sys
+import argparse
+from os import path
+from shapely.geometry import *
+import numpy as np
+from champmetrics.lib.raster import Raster
 from champmetrics.lib.shapefileloader import Shapefile
 from champmetrics.lib.exception import DataException, MissingException
 from champmetrics.lib.metrics import CHaMPMetric
-import argparse
 """
 /Users/work/Projects/CHaMP/tools/tmp/2011/Asotin/ASW00001-NF-F1P2BR/VISIT_228/Topo/GISLayers/Thalweg.shp
 /Users/work/Projects/CHaMP/tools/tmp/2011/Asotin/ASW00001-NF-F1P2BR/VISIT_228/Topo/GISLayers/DEM.tif
@@ -15,21 +15,22 @@ import argparse
 
 """
 
-class  ThalwegMetrics(CHaMPMetric):
+
+class ThalwegMetrics(CHaMPMetric):
 
     TEMPLATE = {
-            'Min': None,
-            'Max': None,
-            'Mean': None,
-            'StDev': None,
-            'Count': None,
-            'Length': None,
-            'WSGradientRatio': None,
-            'WSGradientPC': None,
-            'Sinuosity': None,
-            'CV': None,
-            'ThalwegToCenterlineRatio': None
-        }
+        'Min': None,
+        'Max': None,
+        'Mean': None,
+        'StDev': None,
+        'Count': None,
+        'Length': None,
+        'WSGradientRatio': None,
+        'WSGradientPC': None,
+        'Sinuosity': None,
+        'CV': None,
+        'ThalwegToCenterlineRatio': None
+    }
 
     def calc(self, sThalwegshp, sDepthRaster, sWaterSurfaceRaster, fDist, visitMetrics):
 
@@ -86,7 +87,7 @@ class  ThalwegMetrics(CHaMPMetric):
             'Sinuosity': sinuosity,
             'CV': 0.0,
             'ThalwegToCenterlineRatio': thalweg.length / wettedMainstemLength
-            #, 'Values': results.data
+            # , 'Values': results.data
         }
         if self.metrics['StDev'] != 0 and self.metrics['Mean'] != 0:
             self.metrics['CV'] = self.metrics['StDev'] / self.metrics['Mean']
@@ -115,7 +116,7 @@ class  ThalwegMetrics(CHaMPMetric):
         :param raster:
         :return:
         """
-        pointsdict = { "points": points, "values": [] }
+        pointsdict = {"points": points, "values": []}
 
         for pt in pointsdict['points']:
             pointsdict['values'].append(raster.getPixelVal(pt.coords[0]))
