@@ -26,15 +26,15 @@
           ]
       },
       {
-          "name": "Yankee Fork 2020 Batch (Integrated Terminal)",
+          "name": "Yankee Fork 2018 Batch 595",
           "type": "python",
           "request": "launch",
           "module": "scripts.critfc_2018",
           "console": "integratedTerminal",
           "args": [
               "/Users/philip/GISData/CHaMP/workbench.db",
-              "/Users/philip/GISData/CHaMP/YankeeFork/2020",
-              "/Users/philip/GISData/CHaMP/YankeForkMetrics/2020"
+              "/Users/philip/GISData/CHaMP/YankeeFork/2018",
+              "/Users/philip/GISData/CHaMP/YankeForkMetrics/2018"
           ]
       },
       {

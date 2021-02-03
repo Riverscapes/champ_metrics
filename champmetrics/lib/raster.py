@@ -1,4 +1,4 @@
-import gdal, ogr, osr
+from osgeo import gdal, ogr, osr
 import numpy as np
 from shapely.geometry import shape, Polygon
 from os import path
